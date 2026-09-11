@@ -13,7 +13,7 @@ Core differentiator: the player can hear the state of their settlement and later
 
 1. One world, multiple simulation layers.
 2. Web-first for rapid iteration and Quest 2 accessibility.
-3. Client renders only the currently relevant scene; the server stores authoritative persistent state.
+3. Client renders only the currently relevant scene. v0.0.1 may keep state locally; once cloud/online simulation is enabled, the backend becomes authoritative for persistent shared state.
 4. Systems are modular and data-driven so future mechanics do not require rewriting the foundation.
 5. The first playable version proves the core loop before adding PvP, alliances, large-scale live ops, or monetization complexity.
 6. Performance is protected through scene isolation, chunk/hex streaming, caching, LOD, and compact server state.
@@ -44,7 +44,7 @@ Each hex may store:
 
 Terrain affects movement, combat, sight, concealment, logistics, and attrition. Example categories include urban ruins, forest, hills, open ground, swamp, industrial zones, underground entrances, contaminated zones, and special anomaly regions.
 
-The global map is not rendered in full. The client receives only visible or nearby chunks plus selected strategic overlays. The full world remains server-side data.
+The global map is not rendered in full. The client receives only visible or nearby chunks plus selected strategic overlays. The full world remains server-side data once the persistent world backend is introduced.
 
 ### 3.2 Settlement View
 
@@ -62,7 +62,7 @@ The settlement scene may render:
 - population activity
 - local effects such as smoke, lamps, weather, sound, and NPC activity
 
-When the player enters a settlement, the global world does not need to remain graphically active. Global state continues on the server while the client loads settlement-specific assets and data.
+When the player enters a settlement, the global world does not need to remain graphically active. Once online simulation exists, global state continues on the backend while the client loads settlement-specific assets and data.
 
 ### 3.3 Expedition / Tactical / Special Maps
 
@@ -222,10 +222,10 @@ The first prototype only needs enough hex support to validate coordinates and UI
 - display only relevant world chunks
 - interpolate visual state where appropriate
 
-### Server responsibilities
+### Backend responsibilities when introduced
 - persistent player state
 - persistent settlement state
-- authoritative strategic state when multiplayer arrives
+- authoritative strategic state for shared/online simulation
 - account identity
 - cloud saves
 - future world simulation
@@ -404,7 +404,7 @@ Approved direction:
 - multi-scene simulation
 - future global hex map
 - separate settlement/tactical scenes
-- server-authoritative persistent world when online features arrive
+- local persistence for v0.0.1, backend authority when shared/online simulation is introduced
 - cache/streaming/LOD for performance
 - modular future survival, society, faction, and war systems
 - dynamic layered music as a signature mechanic
